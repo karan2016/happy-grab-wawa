@@ -1,5 +1,5 @@
 // API
-
+let axios = require('axios');
 const servers = [
   {id: 1, name: 'a'},
   {id: 2, name: 'b'},
@@ -15,6 +15,17 @@ module.exports = function setup(app) {
         servers
       });
     }, 3000);
+  });
+
+  app.get('/api/book/:id', (req, res) => {
+    // for example id: 1003078
+    let id = req.params.id;
+    axios.get('https://api.douban.com/v2/book/'+id).then(function (response) {
+      res.json({data: response.data});
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
   });
 
   app.post('/api/servers', (req, res) => {

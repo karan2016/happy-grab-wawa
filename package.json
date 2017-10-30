@@ -11,7 +11,7 @@
     "url": "https://github.com/antonfisher/react-express-webpack.git"
   },
   "scripts": {
-    "dev": "NODE_ENV=development node ./src/server",
+    "dev": "NODE_ENV=development nodemon ./src/server",
     "start": "NODE_ENV=production node ./build/server",
     "prebuild": "mkdir -p ./build; rm -rf ./build/*",
     "build": "npm run build:client && npm run build:server",
@@ -52,6 +52,7 @@
     "style-loader": "0.18.2"
   },
   "dependencies": {
+    "axios": "^0.17.0",
     "babel-polyfill": "6.26.0",
     "body-parser": "1.18.2",
     "compression": "1.7.1",
@@ -60,6 +61,7 @@
     "immutable": "3.8.1",
     "intl": "1.2.5",
     "material-ui": "0.19.2",
+    "nodemon": "^1.12.1",
     "prop-types": "15.6.0",
     "react": "16.0.0",
     "react-dom": "16.0.0",
