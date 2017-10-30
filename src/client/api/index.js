@@ -79,7 +79,12 @@ function addServer(payload) {
   });
 }
 
+function getBook(id) {
+  return _request(`${endpoint}/book/${id}`);
+}
+
 export default {
+  getBook,
   getStats,
   addServer,
   setEndpoint

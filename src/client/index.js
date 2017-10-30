@@ -8,15 +8,13 @@ import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 import {IntlProvider} from 'react-intl';
 import {AppContainer} from 'react-hot-loader';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import api from 'api/index';
 import store from './store';
 import Router from './router';
-import muiTheme from './muiTheme';
 
 // global styles
-import './style.scss';
+import './css/style.scss';
 
 // apply polyfill
 if (!window.Intl) {
@@ -30,9 +28,7 @@ const render = (AppRouter) => {
     <AppContainer>
       <Provider store={store}>
         <IntlProvider locale="en">
-          <MuiThemeProvider muiTheme={muiTheme}>
-            <AppRouter />
-          </MuiThemeProvider>
+          <AppRouter />
         </IntlProvider>
       </Provider>
     </AppContainer>,
