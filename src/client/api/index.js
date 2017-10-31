@@ -43,13 +43,13 @@ function _request(params) {
     requestUrl = params;
     requestParams = {};
   } else {
-    const {url, ...restParams} = params;
+    const { url, ...restParams } = params;
     requestUrl = url;
     requestParams = restParams;
   }
 
   let rawResponse;
-  return fetch(requestUrl, {...defaultParams, ...requestParams})
+  return fetch(requestUrl, { ...defaultParams, ...requestParams })
     .then((response) => {
       rawResponse = response;
       return response.json();
@@ -73,7 +73,7 @@ function addServer(payload) {
   return _request({
     url: `${endpoint}/servers`,
     method: 'POST',
-    headers: new Headers({'content-type': 'application/json'}),
+    headers: new Headers({ 'content-type': 'application/json' }),
     body: JSON.stringify(payload),
     ...defaultParams
   });

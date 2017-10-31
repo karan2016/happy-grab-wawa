@@ -1,4 +1,4 @@
-import {createAction} from 'redux-actions';
+import { createAction } from 'redux-actions';
 
 import api from 'api/index';
 
@@ -69,11 +69,11 @@ export const apiRequestBookData = createAction(API_REQUEST_BOOK_DATA);
 export function apiGetBook(id) {
   return function dispatchApiGetBook(dispatch) {
     const requestId = guidGenerator.next().value;
-    dispatch(apiRequestStarted({requestId}));
+    dispatch(apiRequestStarted({ requestId }));
     return api.getBook(id)
       .then((data) => {
         dispatch(apiRequestBookData(data));
-        dispatch(apiRequestFinished({requestId}));
+        dispatch(apiRequestFinished({ requestId }));
       })
       .catch((error) => {
         // dispatch(apiRequestFinished({requestId, error}));

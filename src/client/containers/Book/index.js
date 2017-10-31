@@ -5,8 +5,7 @@ import {apiGetBook} from 'api/actions';
 
 export class Book extends React.Component {
   componentDidMount() {
-    // console.log(this.props.match.params.id);
-    setInterval(() => this.props.apiGetBook(this.props.match.params.id), 1000);
+    setTimeout(() => this.props.apiGetBook(this.props.match.params.id), 1000);
   }
 
   static defaultProps = {
@@ -14,8 +13,6 @@ export class Book extends React.Component {
   }
 
   render() {
-    console.log(this.props);
-    console.log(this.props.book);
     return (
       <div>
         <div>{this.props.params}</div>
