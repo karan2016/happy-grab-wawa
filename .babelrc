@@ -11,6 +11,11 @@
   ],
   "retainLines": true,
   "plugins": [
-    "react-hot-loader/babel"
+    "react-hot-loader/babel",
+    [
+      "import",
+      { libraryName: "antd", style: "css"
+      }
+    ] // `style: true` 会加载 less 文件
   ]
 }

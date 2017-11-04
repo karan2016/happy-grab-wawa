@@ -1,12 +1,59 @@
 import React from 'react';
-import Styles from './style.scss';
+import ReactDOM from 'react-dom';
+import enquire from 'enquire.js';
+import { scrollScreen } from 'rc-scroll-anim';
+
+import Nav from './Nav';
+import Banner from './Banner';
+import Content from './Content';
+import Content2 from './Content2';
+import Content3 from './Content3';
+import Content4 from './Content4';
+import Footer from './Footer';
+
+import './less/antMotion_style.less';
 
 export class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isMode: false
+    };
+  }
+
+  componentDidMount() {
+    // 适配手机屏幕;
+    this.enquireScreen((isMode) => {
+      this.setState({ isMode });
+    });
+  }
+
+  enquireScreen = (cb) => {
+    /* eslint-disable no-unused-expressions */
+    enquire.register('only screen and (min-width: 320px) and (max-width: 767px)', {
+      match: () => {
+        cb && cb(true);
+      },
+      unmatch: () => {
+        cb && cb();
+      },
+    });
+    /* eslint-enable no-unused-expressions */
+  }
+
   render() {
+    const children = [
+      <Nav id="nav_0_0" key="nav_0_0" isMode={this.state.isMode} />,
+      <Banner id="content_1_0" key="content_1_0" isMode={this.state.isMode} />,
+      <Content id="content_9_0" key="content_9_0" isMode={this.state.isMode} />,
+      <Content2 id="content_2_0" key="content_2_0" isMode={this.state.isMode} />,
+      <Content3 id="content_3_0" key="content_3_0" isMode={this.state.isMode} />,
+      <Content4 id="content_4_0" key="content_4_0" isMode={this.state.isMode} />,
+      <Footer id="footer_0_0" key="footer_0_0" isMode={this.state.isMode} />,
+    ];
     return (
-      <div>
-        <h1>hello, zhichen</h1>
-        <div className={Styles.pageHeader}>great</div>
+      <div className="templates-wrapper">
+        {children}
       </div>
     );
   }
