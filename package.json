@@ -64,6 +64,7 @@
     "compression": "1.7.1",
     "enquire": "^0.0.2",
     "express": "4.15.5",
+    "flexiblejs": "0.0.1",
     "history": "4.7.2",
     "immutable": "3.8.1",
     "intl": "1.2.5",
