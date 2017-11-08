@@ -19,9 +19,15 @@ export class RedPurse extends React.Component {
   }
 
   render() {
+<<<<<<< HEAD
     if (!this.isWeixinBrowser()) {
         return '请在微信或在QQ浏览器中打开';
     }
+=======
+    // if (!this.isWeixinBrowser()) {
+    //     return '请在微信或在QQ浏览器中打开';
+    // }
+>>>>>>> e6ac5b9866b37fa35687f5f13b3c345e0e42fd3a
     const arr = [1, 2, 3];
     const items = arr.map((item, index) => {
       return (
