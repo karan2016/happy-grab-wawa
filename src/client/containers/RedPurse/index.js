@@ -7,9 +7,15 @@ import RedPurseItem from '../../components/RedPurseItem';
 require('./linkedme');
 
 export class RedPurse extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      redirectUrl: ''
+    }
+  }
   componentDidMount() {
     // setTimeout(() => this.props.apiGetBook(this.props.match.params.id), 1000);
-
+    var that = this;
     linkedme.init("e0f606662bb1708fd968a6bf017fc044", null, null);
     let data = {};
     data.type = "test";  //表示现在使用线上模式,如果填写"test", 表示测试模式.【可选】
@@ -18,7 +24,7 @@ export class RedPurse extends React.Component {
     data.channel = "渠道名称"; // 自定义深度链接渠道，多个名称用逗号分隔，【可选】
     data.tags = "标签名称"; // 自定义深度链接标签，多个名称用逗号分隔，【可选】
     data.ios_custom_url = ""; // 自定义iOS平台下App的下载地址，如果是AppStore的下载地址可以不用填写，【可选】
-    data.ios_direct_open = ""; //未安装情况下，设置为true为直接打开ios_custom_url，默认为false【可选】
+    data.ios_direct_open = "true"; //未安装情况下，设置为true为直接打开ios_custom_url，默认为false【可选】
     data.android_custom_url = "";// 自定义安卓平台下App的下载地址，【可选】
     data.android_direct_open = ""; //设置为true，所有情况下跳转android_custom_url，默认为false【可选】
     // 下面是自定义深度链接参数，用户点击深度链接打开app之后，params的参数会通过LinkedME服务器透传给app，由app根据参数进行相关跳转
@@ -32,10 +38,14 @@ export class RedPurse extends React.Component {
         console.log(err);
       } else {
         // 生成深度链接成功，深度链接可以通过data.url得到
-        response.url
+        console.log('res');
+        console.log(response.url);
+        that.setState({'redirectUrl': response.url});
+        console.log(that.state);
       }
     }, false);
     console.log(data);
+    console.log(data.url);
   }
 
   static defaultProps = {
@@ -84,7 +94,7 @@ export class RedPurse extends React.Component {
           </div>
         </div>
         <div className={Styles.useBtnWrap}>
-          <button>立即使用</button>
+          <a href={this.state.redirectUrl}>立即使用</a>
         </div>
         <div className={Styles.container}>
           <div className={Styles.titleWrap}>
