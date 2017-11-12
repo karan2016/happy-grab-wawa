@@ -4,6 +4,7 @@ import Styles from './style.scss';
 import { connect } from 'react-redux';
 // import {apiGetBook} from 'api/actions';
 import RedPurseItem from '../../components/RedPurseItem';
+import DocumentMeta from 'react-document-meta';
 require('./linkedme');
 
 export class RedPurse extends React.Component {
@@ -13,6 +14,7 @@ export class RedPurse extends React.Component {
       redirectUrl: ''
     }
   }
+
   componentDidMount() {
     // setTimeout(() => this.props.apiGetBook(this.props.match.params.id), 1000);
     var that = this;
@@ -40,7 +42,7 @@ export class RedPurse extends React.Component {
         // 生成深度链接成功，深度链接可以通过data.url得到
         console.log('res');
         console.log(response.url);
-        that.setState({'redirectUrl': response.url});
+        that.setState({ 'redirectUrl': response.url });
         console.log(that.state);
       }
     }, false);
@@ -61,6 +63,18 @@ export class RedPurse extends React.Component {
     // if (!this.isWeixinBrowser()) {
     //   return '请在微信或在QQ浏览器中打开';
     // }
+
+    const meta = {
+      title: '幸运抓娃娃',
+      description: '幸运抓娃娃，第6、7个人获得的金币最多',
+      meta: {
+        charset: 'utf-8',
+        name: {
+          keywords: '幸运抓娃娃'
+        }
+      }
+    };
+
     const arr = [{
       username: '随风而去',
       time: '2017-10-23 10:09:52',
@@ -76,48 +90,53 @@ export class RedPurse extends React.Component {
       );
     });
     return (
-      <div className={Styles.page}>
-        <div className={Styles.banner}></div>
-        <div className={Styles.winningOutcome}>
-          <div className={Styles.outcomeWrap}>
-            <div className={Styles.ticket}>
-              <div className={Styles.gold}>
-                <span>500</span>金币
+      <div>
+        <DocumentMeta {...meta} />
+        <div className={Styles.page}>
+          <div className={Styles.banner}>
+            <img src="http://ozak7cmqk.bkt.clouddn.com/red-purse-banner.png" />
+          </div>
+          <div className={Styles.winningOutcome}>
+            <div className={Styles.outcomeWrap}>
+              <div className={Styles.ticket}>
+                <div className={Styles.gold}>
+                  <span>500</span>金币
               </div>
-              <div className={Styles.border}></div>
-              <div className={Styles.msgWrap}>
-                <p>拼手气红包</p>
-                <p>金币已放至账户</p>
+                <div className={Styles.msgWrap}>
+                  <p>拼手气红包</p>
+                  <p>金币已放至账户</p>
+                </div>
               </div>
+              <div className={Styles.reminder}>登录App即可使用</div>
             </div>
-            <div className={Styles.reminder}>登录App即可使用</div>
           </div>
-        </div>
-        <div className={Styles.useBtnWrap}>
-          <a href={this.state.redirectUrl}>立即使用</a>
-        </div>
-        <div className={Styles.container}>
-          <div className={Styles.titleWrap}>
-            <span>看朋友们手气如何</span>
-            <div className={Styles.horizonSeparate}></div>
+          <div className={Styles.useBtnWrap}>
+            <a href={this.state.redirectUrl}>立即使用</a>
           </div>
-          <div className={Styles.content}>
-            {items}
+          <div className={Styles.container}>
+            <div className={Styles.titleWrap}>
+              <span>看朋友们手气如何</span>
+              <div className={Styles.horizonSeparate}></div>
+            </div>
+            <div className={Styles.content}>
+              {items}
+            </div>
           </div>
-        </div>
-        <div className={Styles.container}>
-          <div className={Styles.titleWrap}>
-            <span>活动细则</span>
-            <div className={Styles.horizonSeparate}></div>
-          </div>
-          <div className={Styles.content}>
-            <p>1. 每位用户每天至多可以领取20次红包。</p>
-            <p>2. 使用红包的账户需为抢红包时使用的微信账户。</p>
-            <p>3. 发放至幸运抓娃娃账户的金币红包登录后即可使用。</p>
-            <p>4. 幸运抓娃娃保留法律范围内允许的对活动的解释权。</p>
+          <div className={Styles.container}>
+            <div className={Styles.titleWrap}>
+              <span>活动细则</span>
+              <div className={Styles.horizonSeparate}></div>
+            </div>
+            <div className={Styles.content}>
+              <p>1. 每位用户每天至多可以领取20次红包。</p>
+              <p>2. 使用红包的账户需为抢红包时使用的微信账户。</p>
+              <p>3. 发放至幸运抓娃娃账户的金币红包登录后即可使用。</p>
+              <p>4. 幸运抓娃娃保留法律范围内允许的对活动的解释权。</p>
+            </div>
           </div>
         </div>
       </div>
+
     );
   }
 }
