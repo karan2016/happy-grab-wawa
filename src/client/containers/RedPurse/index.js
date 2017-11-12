@@ -3,6 +3,7 @@ import 'flexiblejs';
 import Styles from './style.scss';
 import { connect } from 'react-redux';
 // import {apiGetBook} from 'api/actions';
+import RedPurseItem from '../../components/RedPurseItem';
 
 export class RedPurse extends React.Component {
   componentDidMount() {
@@ -13,28 +14,27 @@ export class RedPurse extends React.Component {
 
   }
 
-  isWeixinBrowser(){
+  isWeixinBrowser() {
     let ua = navigator.userAgent.toLowerCase();
-    return (/micromessenger/.test(ua)) ? true : false ;
+    return (/micromessenger/.test(ua)) ? true : false;
   }
 
   render() {
-    if (!this.isWeixinBrowser()) {
-        return '请在微信或在QQ浏览器中打开';
-    }
-    const arr = [1, 2, 3];
+    // if (!this.isWeixinBrowser()) {
+    //   return '请在微信或在QQ浏览器中打开';
+    // }
+    const arr = [{
+      username: '随风而去',
+      time: '2017-10-23 10:09:52',
+      gold: '500'
+    },{
+      username: '让往事再随风而去',
+      time: '2017-10-25 10:09:52',
+      gold: '700'
+    }];
     const items = arr.map((item, index) => {
       return (
-        <div className={Styles.item}>
-          <img />
-          <div className={Styles.itemContent}>
-            <p>随风而去</p>
-            <p>2017-10-23 10:09:52</p>
-          </div>
-          <div className={Styles.gold}>
-            <span>500</span>金币
-          </div>
-      </div>
+        <RedPurseItem key={index} data={item}/>
       );
     });
     return (
@@ -48,8 +48,8 @@ export class RedPurse extends React.Component {
               </div>
               <div className={Styles.border}></div>
               <div className={Styles.msgWrap}>
-                  <p>拼手气红包</p>
-                  <p>金币已放至账户</p>
+                <p>拼手气红包</p>
+                <p>金币已放至账户</p>
               </div>
             </div>
             <div className={Styles.reminder}>登录App即可使用</div>
@@ -73,7 +73,7 @@ export class RedPurse extends React.Component {
             <div className={Styles.horizonSeparate}></div>
           </div>
           <div className={Styles.content}>
-            <p>1.  每位用户每天至多可以领取20次红包。</p>
+            <p>1. 每位用户每天至多可以领取20次红包。</p>
             <p>2. 使用红包的账户需为抢红包时使用的微信账户。</p>
             <p>3. 发放至幸运抓娃娃账户的金币红包登录后即可使用。</p>
             <p>4. 幸运抓娃娃保留法律范围内允许的对活动的解释权。</p>
