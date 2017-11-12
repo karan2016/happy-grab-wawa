@@ -4,10 +4,38 @@ import Styles from './style.scss';
 import { connect } from 'react-redux';
 // import {apiGetBook} from 'api/actions';
 import RedPurseItem from '../../components/RedPurseItem';
+require('./linkedme');
 
 export class RedPurse extends React.Component {
   componentDidMount() {
     // setTimeout(() => this.props.apiGetBook(this.props.match.params.id), 1000);
+
+    linkedme.init("e0f606662bb1708fd968a6bf017fc044", null, null);
+    let data = {};
+    data.type = "test";  //表示现在使用线上模式,如果填写"test", 表示测试模式.【可选】
+    data.feature = "功能名称"; // 自定义深度链接功能，多个名称用逗号分隔，【可选】
+    data.stage = "阶段名称"; // 自定义深度链接阶段，多个名称用逗号分隔，【可选】
+    data.channel = "渠道名称"; // 自定义深度链接渠道，多个名称用逗号分隔，【可选】
+    data.tags = "标签名称"; // 自定义深度链接标签，多个名称用逗号分隔，【可选】
+    data.ios_custom_url = ""; // 自定义iOS平台下App的下载地址，如果是AppStore的下载地址可以不用填写，【可选】
+    data.ios_direct_open = ""; //未安装情况下，设置为true为直接打开ios_custom_url，默认为false【可选】
+    data.android_custom_url = "";// 自定义安卓平台下App的下载地址，【可选】
+    data.android_direct_open = ""; //设置为true，所有情况下跳转android_custom_url，默认为false【可选】
+    // 下面是自定义深度链接参数，用户点击深度链接打开app之后，params的参数会通过LinkedME服务器透传给app，由app根据参数进行相关跳转
+    // 例如：详情页面的参数，写入到params中，这样在唤起app并获取参数后app根据参数跳转到详情页面
+    var value1 = 1;
+    var value2 = 2;
+    data.params = '{"key1":"' + value1 + '","key2":"' + value2 + '"}'; //注意单引号和双引号的位置
+    linkedme.link(data, function (err, response) {
+      if (err) {
+        // 生成深度链接失败，返回错误对象err
+        console.log(err);
+      } else {
+        // 生成深度链接成功，深度链接可以通过data.url得到
+        response.url
+      }
+    }, false);
+    console.log(data);
   }
 
   static defaultProps = {
@@ -27,14 +55,14 @@ export class RedPurse extends React.Component {
       username: '随风而去',
       time: '2017-10-23 10:09:52',
       gold: '500'
-    },{
+    }, {
       username: '让往事再随风而去',
       time: '2017-10-25 10:09:52',
       gold: '700'
     }];
     const items = arr.map((item, index) => {
       return (
-        <RedPurseItem key={index} data={item}/>
+        <RedPurseItem key={index} data={item} />
       );
     });
     return (
