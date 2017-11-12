@@ -14,6 +14,9 @@ export class RedPurse extends React.Component {
       redirectUrl: ''
     }
   }
+  componentWillMount() {
+    document.title = '幸运抓娃娃';
+  }
 
   componentDidMount() {
     // setTimeout(() => this.props.apiGetBook(this.props.match.params.id), 1000);
