@@ -2,9 +2,6 @@ import React from 'react';
 import Styles from './style.scss';
 
 export class Rank extends React.Component {
-    
-
-
     render() {
         const ranks = [
             {'rank': 1, 'exp': 0},
@@ -49,7 +46,7 @@ export class Rank extends React.Component {
         });
 
         return (
-        <div>
+        <div className={Styles.page}>
             <ul>
                 <li className={Styles.title}>
                     <div>等级</div>

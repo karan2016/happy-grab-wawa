@@ -1,24 +1,26 @@
-li {
-    border-bottom: .026667rem /* 1/37.5 */ solid #E0E0E0;
-
-    &.title {
-        background-color: #F2F2F2;
-
-        div {
-            font-weight: 500;
-        }
-    }
+.page {
+    li {
+        border-bottom: .026667rem /* 1/37.5 */ solid #E0E0E0;
     
-    div {
-        display: inline-block;
-        width: 50%;
-        text-align: center;
-        height: 1.173333rem /* 44/37.5 */;
-        line-height: 1.173333rem /* 44/37.5 */;
-        font-size: .373333rem /* 14/37.5 */;
-    }
-
-    div:nth-of-type(1) {
-        border-right: .026667rem /* 1/37.5 */ solid #E0E0E0;
+        &.title {
+            background-color: #F2F2F2;
+    
+            div {
+                font-weight: 500;
+            }
+        }
+        
+        div {
+            display: inline-block;
+            width: 50%;
+            text-align: center;
+            height: 1.173333rem /* 44/37.5 */;
+            line-height: 1.173333rem /* 44/37.5 */;
+            font-size: .373333rem /* 14/37.5 */;
+        }
+    
+        div:nth-of-type(1) {
+            border-right: .026667rem /* 1/37.5 */ solid #E0E0E0;
+        }
     }
 }
