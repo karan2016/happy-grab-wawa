@@ -83,9 +83,13 @@ function getBook(id) {
   return _request(`${endpoint}/book/${id}`);
 }
 
+function grabRedPacket(obj) {
+  return _request(`${endpoint}/red-packet?userId=${obj.userId}&grabUserId=${obj.grabUserId}&redPacketId=${obj.redPacketId}`);
+}
 export default {
   getBook,
   getStats,
   addServer,
-  setEndpoint
+  setEndpoint,
+  grabRedPacket
 };

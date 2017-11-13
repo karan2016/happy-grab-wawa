@@ -2,24 +2,43 @@ import React from 'react';
 import 'flexiblejs';
 import Styles from './style.scss';
 import { connect } from 'react-redux';
-// import {apiGetBook} from 'api/actions';
-import RedPurseItem from '../../components/RedPurseItem';
+import { apiGrabRedPacketOutcome } from 'api/actions';
+import RedPacketItem from '../../components/RedPacketItem';
 import DocumentMeta from 'react-document-meta';
 require('./linkedme');
 
-export class RedPurse extends React.Component {
+export class redPacket extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       redirectUrl: ''
     }
   }
+
   componentWillMount() {
     document.title = '幸运抓娃娃';
   }
 
   componentDidMount() {
-    // setTimeout(() => this.props.apiGetBook(this.props.match.params.id), 1000);
+    let reqObj = {
+      "userId": "16",
+      "grabUserId": "21",
+      "redPacketId": "130"
+    }
+    setTimeout(() => this.props.apiGrabRedPacketOutcome(reqObj), 1000);
+    this.generateDeepShareUrl();
+  }
+
+  static defaultProps = {
+    
+  }
+
+  isWeixinBrowser() {
+    let ua = navigator.userAgent.toLowerCase();
+    return (/micromessenger/.test(ua)) ? true : false;
+  }
+
+  generateDeepShareUrl() {
     var that = this;
     linkedme.init("e0f606662bb1708fd968a6bf017fc044", null, null);
     let data = {};
@@ -53,14 +72,6 @@ export class RedPurse extends React.Component {
     console.log(data.url);
   }
 
-  static defaultProps = {
-
-  }
-
-  isWeixinBrowser() {
-    let ua = navigator.userAgent.toLowerCase();
-    return (/micromessenger/.test(ua)) ? true : false;
-  }
 
   render() {
     // if (!this.isWeixinBrowser()) {
@@ -87,11 +98,16 @@ export class RedPurse extends React.Component {
       time: '2017-10-25 10:09:52',
       gold: '700'
     }];
+
     const items = arr.map((item, index) => {
       return (
-        <RedPurseItem key={index} data={item} />
+        <RedPacketItem key={index} data={item} />
       );
     });
+
+    let redPacketOutcome = this.props.redPacket.data;
+    console.log(redPacketOutcome);
+
     return (
       <div>
         <DocumentMeta {...meta} />
@@ -103,7 +119,7 @@ export class RedPurse extends React.Component {
             <div className={Styles.outcomeWrap}>
               <div className={Styles.ticket}>
                 <div className={Styles.gold}>
-                  <span>500</span>金币
+                  <span>{redPacketOutcome.amount}</span>金币
               </div>
                 <div className={Styles.msgWrap}>
                   <p>拼手气红包</p>
@@ -146,14 +162,16 @@ export class RedPurse extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    // book: state.api.get('book'),
+    redPacket: state.api.get('redPacket'),
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-
+    apiGrabRedPacketOutcome(reqObj) {
+      dispatch(apiGrabRedPacketOutcome(reqObj));
+    }
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(RedPurse);
+export default connect(mapStateToProps, mapDispatchToProps)(redPacket);

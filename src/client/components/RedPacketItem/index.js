@@ -2,7 +2,7 @@ import React from 'react';
 import 'flexiblejs';
 import Styles from './style.scss';
 
-class RedPurseItem extends React.Component {
+class RedPacketItem extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -29,4 +29,4 @@ class RedPurseItem extends React.Component {
     }
 }
 
-export default RedPurseItem;
+export default RedPacketItem;

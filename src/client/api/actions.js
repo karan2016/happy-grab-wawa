@@ -22,6 +22,8 @@ export const apiDataServersLoaded = createAction(API_DATA_SERVERS_LOADED);
 export const API_REQUEST_BOOK_DATA = 'API_REQUEST_BOOK_DATA';
 export const apiRequestBookData = createAction(API_REQUEST_BOOK_DATA);
 
+export const API_GRAB_REDPACKET = 'API_GRAB_REDPACKET';
+export const apiGrabRedPacket = createAction(API_GRAB_REDPACKET);
 // export function apiGetServers(callback) {
 //   return function dispatchApiGetServers(dispatch) {
 //     const requestId = guidGenerator.next().value;
@@ -83,4 +85,20 @@ export function apiGetBook(id) {
         // }));
       });
   };
+}
+
+export function apiGrabRedPacketOutcome(reqObj) {
+  return function dispatchApiGrabRedPacket(dispatch) {
+    const requestId = guidGenerator.next().value;
+    dispatch(apiRequestStarted({ requestId }));
+    return api.grabRedPacket(reqObj)
+      .then((data) => {
+        console.log(data);
+        dispatch(apiGrabRedPacket(data));
+        dispatch(apiRequestFinished({ requestId }));
+      })
+      .catch((error) => {
+        
+      });
+  }
 }
