@@ -15,11 +15,28 @@ export class redPacket extends React.Component {
     }
   }
 
-  componentWillMount() {
-    document.title = '幸运抓娃娃';
+  static defaultProps = {
   }
 
-  componentDidMount() {
+  componentWillMount() {
+    document.title = '幸运抓娃娃';
+    let redPacketId = this.props.match.params.id;
+    let storage = window.localStorage;
+    
+    storage.setItem('redPacketId', redPacketId);
+    
+    storage.setItem('openId', '11111111111');
+    if (storage.getItem('openId')) {
+      console.log('existed');
+    } else {
+      console.log('not existe');
+      // window.location = 'http://www.baidu.com';
+      const APPID = 'APPID';
+      const redirect_uri = 'redirect_uri';
+      // window.location = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid='+ APPID+'&redirect_uri=' + redirect_uri + '&response_type=code&scope=SCOPE&state=STATE#wechat_redirect';
+    }
+
+    
     let reqObj = {
       "userId": "16",
       "grabUserId": "21",
@@ -29,9 +46,7 @@ export class redPacket extends React.Component {
     this.generateDeepShareUrl();
   }
 
-  static defaultProps = {
-    
-  }
+
 
   isWeixinBrowser() {
     let ua = navigator.userAgent.toLowerCase();
